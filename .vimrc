@@ -20,6 +20,7 @@ set pastetoggle=<F2>	    	"better copy&paste
 set clipboard=unnamed  		"before pasting, press F2
 set encoding=utf-8
 set termencoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -27,6 +28,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
 
 nnoremap <F5> :GundoToggle<CR>
 nmap <F8> :TagbarToggle<CR>
@@ -41,6 +46,12 @@ let g:airline#extensions#bufferline#enabled = 0
 let g:tagbar_width = 28
 let g:airline_theme = 'base16'
 let g:YUNOcommit_after = 10
+
+" ===========================================================
+" Emmet Settings
+" ===========================================================
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 " ===========================================================
 " Solarized Colorscheme Config
