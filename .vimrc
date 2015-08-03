@@ -1,14 +1,12 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-" autocmd VimEnter * nested :TagbarOpen
 
 set mouse=a            		"mouse can enable visual mode
 set number             		"show linenumber
 set ruler                       "show the cursor position all the time
 set showcmd                     "display incomplete commands
 set incsearch                   "do incremental searching
-set nu                          "show line numbers
 set hlsearch                    "highlight search terms
 set ic                          "ignore Case during searches
 set foldmethod=indent           "allows codefolding by indent
@@ -18,9 +16,7 @@ set laststatus=2                "always show statusline
 set go+=a              		"visual selection automatically copied to the clipboard
 set pastetoggle=<F2>	    	"better copy&paste
 set clipboard=unnamed  		"before pasting, press F2
-set encoding=utf-8
-set termencoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
+set fillchars=""
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -34,17 +30,19 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 
 nnoremap <F5> :GundoToggle<CR>
-nmap <F8> :TagbarToggle<CR>
+nmap <C-t> :TagbarToggle<CR>
 
 " ===========================================================
 " VIM airline settings
 " ===========================================================
+let g:bufferline_echo = 0
 let g:airline_powerline_fonts = 1
+set t_Co=256
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#bufferline#enabled = 0
 let g:tagbar_width = 28
-let g:airline_theme = 'base16'
+let g:airline_theme = 'hybridline'
 let g:YUNOcommit_after = 10
 
 " ===========================================================
@@ -78,6 +76,16 @@ let g:syntastic_python_checker_args='--ignore=E501,E225'
 " Kivy
 au BufRead,BufNewFile *.kv set filetype=kivy
 au! Syntax kivy source $HOME/.vim/syntax/kivy.vim
+
+" CSS
+" let g:tagbar_type_css = {
+" \ 'ctagstype' : 'Css',
+"     \ 'kinds'     : [
+" 	\ 'c:classes',
+" 	\ 's:selectors',
+" 	\ 'i:identities'
+"     \]
+" \}
 " ============================================================
 
 " This fixes the exit from insert mode delay. I got this from:
