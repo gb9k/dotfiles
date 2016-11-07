@@ -1,0 +1,48 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+set number              "show linenumber
+set ruler               "show the cursor position all the time
+set showcmd             "display incomplete commands
+set incsearch           "do incremental searching
+set hlsearch            "highlight search terms
+set ic                  "ignore Case during searches
+set foldmethod=indent   "allows codefolding by indent
+set noswapfile          "no more pesky swap files
+set laststatus=2        "always show statusline
+set go+=a               "visual selection automatically copied to the clipboard
+set fillchars=""
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" ===========================================================
+" Airline settings
+" ===========================================================
+let g:bufferline_echo = 0
+let g:airline_powerline_fonts = 1
+set t_Co=256
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline_theme = 'hybridline'
+
+" ============================================================
+" Insert Mode Exit Delay Fix
+" https://powerline.readthedocs.org/en/latest/tipstricks.html#vim
+" ============================================================
+set timeout     		" Do time out on mappings and others
+set timeoutlen=2000		" Wait {num} ms before timing out a mapping
+if !has('gui_running')
+	set ttimeoutlen=10
+	augroup FastEscape
+		autocmd!
+		au InsertEnter * set timeoutlen=0
+		au InsertLeave * set timeoutlen=1000
+	augroup END
+endif
