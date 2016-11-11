@@ -17,4 +17,4 @@ git clone https://github.com/mattn/emmet-vim.git
 git clone git://github.com/tpope/vim-surround.git
 cd ../..
 rm get-pip.py
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+bash -c "$(curl -fsSL https://git.io/vuMdM)"
