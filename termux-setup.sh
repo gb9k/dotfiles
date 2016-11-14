@@ -2,8 +2,9 @@
 
 wget https://bootstrap.pypa.io/get-pip.py
 wget https://raw.githubusercontent.com/gb9k/dotfiles/master/.vimrc-simple
--H python get-pip.py
--H pip install flake8
+mv .vimrc-simple .vimrc
+python get-pip.py
+pip install flake8
 mkdir -p ~/.fonts &&\
 git clone https://github.com/powerline/fonts.git ~/.fonts
 fc-cache -vf ~/.fonts
